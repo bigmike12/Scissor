@@ -1,3 +1,37 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "standard-with-typescript",
+    "plugin:react/recommended",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "ignorePatterns": ["next-env.d.ts"], //this is being ignored because the file regenerates on every build hence overriding linting.
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/await-thenable": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
