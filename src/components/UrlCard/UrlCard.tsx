@@ -4,6 +4,8 @@ import { type TableData } from "../../lib/commons";
 
 import React, { useState } from "react";
 import Modal from "@/components/Modal/Modal";
+import { showToast } from "../ShowToast/showToast";
+import { NotificationTypes } from "@/lib/utils";
 
 interface Props {
   data: TableData;
@@ -15,6 +17,13 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
 
   const handleOpenModal = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const handleCopy = (text: string) => {
+    const URLPrefix = "https://scissor-8nse.vercel.app/";
+    const fullUrl = `${URLPrefix}${text}`;
+    navigator.clipboard.writeText(fullUrl);
+    showToast("Copied!", NotificationTypes.SUCCESS);
   };
 
   return (
@@ -30,7 +39,11 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
         <div>
           <div className="flex gap-5 mb-5">
             <p>{data.shortURL}</p>
-            <Icon name="copy" />
+            <Icon
+              name="copy"
+              onClick={() => handleCopy(data.shortURL)}
+              className="hover:cursor-pointer"
+            />
           </div>
           <div>
             <div className="w-[681px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
