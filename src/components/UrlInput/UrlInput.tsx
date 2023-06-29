@@ -43,7 +43,6 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
   });
   const linksCollectionRef = collection(db, "links");
   const updateLinksCollectionRef = doc(db, "links", `${data?.id}`);
-  console.log("links collection", updateLinksCollectionRef);
 
   const handleFormInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormInput((prevState) => ({
@@ -161,14 +160,14 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
               type="submit"
             >
               {!loading ? (
-                <>
+                <div className="flex">
                   {!edit ? (
                     <p className="cursor-pointer">Shorten URL</p>
                   ) : (
                     <p className="cursor-pointer">Edit URL</p>
                   )}
                   <Icon name="magic" />
-                </>
+                </div>
               ) : (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               )}

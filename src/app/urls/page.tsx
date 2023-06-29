@@ -7,6 +7,8 @@ import { db } from "@/firebase/config/firebase";
 import UrlCard from "@/components/UrlCard/UrlCard";
 import { type TableData } from "@/lib/commons";
 import { LocalStorageKeys, isNotEmptyArray } from "@/lib/utils";
+import UrlCardSkeleton from "@/components/Skeletons/UrlCardSkeleton";
+import { range } from "lodash";
 
 const EmptyTable = () => {
   return (
@@ -24,6 +26,7 @@ const EmptyTable = () => {
 
 const MyUrls = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [myUrlsData, setMyUrlsData] = useState<any[]>([]);
 
   let userID;
@@ -36,15 +39,17 @@ const MyUrls = () => {
   useEffect(() => {
     const getList = async () => {
       // READ THE DATA
+      setLoading(true);
       try {
         const data = await getDocs(q);
         const filteredData = data.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
-
+        setLoading(false);
         setMyUrlsData(filteredData);
       } catch (err) {
+        setLoading(false);
         console.error(err);
       }
     };
@@ -62,9 +67,9 @@ const MyUrls = () => {
 
   return (
     <div className="">
-      {myUrlsData.length === 0 ? (
-        <EmptyTable />
-      ) : (
+      {loading ? (
+        range(5).map((item, index) => <UrlCardSkeleton key={index} />)
+      ) : myUrlsData && myUrlsData?.length > 0 ? (
         <div className="mt-8">
           <div className="flex justify-center mb-6">
             <h2 className="font-bold text-[32px]">My recent URLs</h2>
@@ -78,6 +83,8 @@ const MyUrls = () => {
               ))}
           </div>
         </div>
+      ) : (
+        <EmptyTable />
       )}
       <SideBar isDrawerOpen={drawerOpen} toggleDrawer={setDrawerOpen} />
     </div>

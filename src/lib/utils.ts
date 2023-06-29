@@ -24,3 +24,18 @@ export const NotificationTypes = {
  */
 export const isNotEmptyArray = (arr: any[]): boolean =>
   Array.isArray(arr) && arr.length > 0;
+
+export const removeLeadingSlash = (str: string): string => {
+  return str.replace(/^\/+/, "");
+};
+
+export const addHttpPrefix = (url: string): string => {
+  const httpPrefix = "http://";
+  const httpsPrefix = "https://";
+
+  if (url.startsWith(httpPrefix) || url.startsWith(httpsPrefix)) {
+    return url;
+  } else {
+    return `${httpsPrefix}${url}`;
+  }
+};

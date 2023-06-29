@@ -173,9 +173,9 @@ const Signup = () => {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col pt-10 gap-4 border-t border-gray">
-          <span className="font-normal text-xl text-blue hover:cursor-default">
+          <p className="font-normal text-xl text-blue hover:cursor-default">
             OR
-          </span>
+          </p>
           <Button
             className="bg-transparent border border-primary w-full h-14 text-lg text-black font-semibold gap-4"
             onClick={googleSignUp}
