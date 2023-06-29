@@ -10,7 +10,12 @@ interface Props {
   edit: boolean;
 }
 
-const Modal: React.FC<Props> = ({ isModalOpen, toggleModal, data, edit }) => {
+const EditModal: React.FC<Props> = ({
+  isModalOpen,
+  toggleModal,
+  data,
+  edit,
+}) => {
   return (
     <div>
       <Dialog open={isModalOpen} onOpenChange={toggleModal}>
@@ -22,4 +27,4 @@ const Modal: React.FC<Props> = ({ isModalOpen, toggleModal, data, edit }) => {
   );
 };
 
-export default Modal;
+export default EditModal;

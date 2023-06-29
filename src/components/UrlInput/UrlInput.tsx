@@ -142,7 +142,7 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
                   tabIndex={-1}
                   placeholder="Scissor.com/"
                   onChange={handleFormInput}
-                  className="rounded-3xl border-primary h-14 active:border-primary focus:border-primary"
+                  className="rounded-3xl border-primary h-14 active:border-primary focus:border-primary font-bold text-black"
                 />
                 <Input
                   id="url"

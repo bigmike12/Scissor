@@ -15,17 +15,17 @@ const URLRedirect = () => {
       const docRef = query(linksRef, where("shortURL", "==", `${path}`));
       const querySnapshot = await getDocs(docRef);
       // Either mothods below works
-      // querySnapshot.forEach((doc) => {
-      //   // Access the document data using doc.data()
-      //   const url = addHttpPrefix(doc.data().longURL);
-      //   window.location.href = url;
-      // });
-
-      if (!querySnapshot.empty) {
-        const doc = querySnapshot.docs[0];
+      querySnapshot.forEach((doc) => {
+        // Access the document data using doc.data()
         const url = addHttpPrefix(doc.data().longURL);
         window.location.href = url;
-      }
+      });
+
+      // if (!querySnapshot.empty) {
+      //   const doc = querySnapshot.docs[0];
+      //   const url = addHttpPrefix(doc.data().longURL);
+      //   window.location.href = url;
+      // }
     };
 
     redirect();

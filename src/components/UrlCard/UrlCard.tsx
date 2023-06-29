@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { type TableData } from "../../lib/commons";
 
 import React, { useState } from "react";
-import Modal from "@/components/Modal/Modal";
 import { showToast } from "../ShowToast/showToast";
 import { NotificationTypes } from "@/lib/utils";
+import EditModal from "@/components/Modal/Modal";
+import QRModal from "../QRModal/QRModal";
 
 interface Props {
   data: TableData;
@@ -14,9 +15,14 @@ interface Props {
 
 const UrlCard = ({ data, handleOpenDrawer }: Props) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [qrModalOpen, setQrModalOpen] = useState<boolean>(false);
 
   const handleOpenModal = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const handleQROpenModal = () => {
+    setQrModalOpen(!qrModalOpen);
   };
 
   const handleCopy = (text: string) => {
@@ -54,7 +60,10 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
                 <Icon name="share" />
                 Share link
               </Button>
-              <Button className="bg-transparent border border-white h-[48px] w-[138px] text-white font-medium gap-3">
+              <Button
+                className="bg-transparent border border-white h-[48px] w-[138px] text-white font-medium gap-3"
+                onClick={handleQROpenModal}
+              >
                 <Icon name="qrcode" />
                 QR Code
               </Button>
@@ -76,11 +85,16 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
           </div>
         </div>
       </div>
-      <Modal
+      <EditModal
         isModalOpen={modalOpen}
         toggleModal={setModalOpen}
         data={data}
         edit
+      />
+      <QRModal
+        isModalOpen={qrModalOpen}
+        toggleModal={setQrModalOpen}
+        data={data}
       />
     </>
   );
