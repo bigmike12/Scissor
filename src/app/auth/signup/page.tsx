@@ -17,38 +17,66 @@ import Icon from "@/assets/Icons/icon";
 import signUp from "@/firebase/auth/signup";
 import { useRouter } from "next/navigation";
 import googleSignIn from "@/firebase/auth/google";
+import { type ZodType, z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface FormData {
+// interface FormData {
+//   username: string;
+//   email: string;
+//   password: string;
+// }
+
+interface ZodFormData {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 const Signup = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [signup, setSignup] = useState<FormData>({
-    username: "",
-    email: "",
-    password: "",
+  // const [signup, setSignup] = useState<FormData>({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  // });
+
+  const schema: ZodType<ZodFormData> = z
+    .object({
+      username: z.string().min(4).max(20),
+      email: z.string().email(),
+      password: z.string().min(8).max(20),
+      confirmPassword: z.string().min(8).max(20),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Passwords do not match",
+      path: ["confirmPassword"],
+    });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ZodFormData>({
+    resolver: zodResolver(schema),
   });
 
-  const handleFormInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSignup((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // const handleFormInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSignup((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e: any) => {
-    const { email, password } = signup;
-    e.preventDefault();
-
+  const handleSubmitForm = async (data: ZodFormData) => {
+    const { email, password } = data;
     setLoading(true);
     const { result, error } = await signUp({ email, password });
     if (result) {
@@ -87,7 +115,10 @@ const Signup = () => {
         </CardHeader>
 
         <CardContent>
-          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+          <form
+            className="flex flex-col gap-5"
+            onSubmit={handleSubmit(handleSubmitForm)}
+          >
             <div className="flex flex-col space-y-1.5">
               <Label
                 htmlFor="username"
@@ -97,12 +128,16 @@ const Signup = () => {
               </Label>
               <Input
                 id="username"
-                name="username"
+                // name="username"
                 type="text"
                 placeholder="Enter username"
                 className="rounded-3xl border-primary h-14"
-                onChange={(e) => handleFormInput(e)}
+                // onChange={(e) => handleFormInput(e)}
+                {...register("username")}
               />
+              {errors.username && (
+                <span className="text-red-700">{errors.username?.message}</span>
+              )}
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email" className="font-medium text-lg text-black">
@@ -110,62 +145,74 @@ const Signup = () => {
               </Label>
               <Input
                 id="email"
-                name="email"
+                // name="email"
                 type="email"
                 placeholder="Enter email"
                 className="rounded-3xl border-primary h-14"
-                onChange={(e) => handleFormInput(e)}
+                // onChange={(e) => handleFormInput(e)}
+                {...register("email")}
               />
+              {errors.email && (
+                <span className="text-red-700">{errors.email?.message}</span>
+              )}
             </div>
-            <div className="flex flex-col space-y-1.5 relative z-[2px]">
-              <Label
-                htmlFor="password"
-                className="font-medium text-lg text-black"
-              >
-                Password
-              </Label>
-              <Input
-                id="password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter password"
-                className="rounded-3xl border-primary h-14"
-                onChange={(e) => handleFormInput(e)}
-              />
-              <Icon
-                name="viewPassword"
-                className="absolute right-4 bottom-3"
-                onClick={handleShowPassword}
-              />
-            </div>
-            <div className="flex flex-col space-y-1.5 relative">
-              <Label
-                htmlFor="confirmpassword"
-                className="font-medium text-lg text-black"
-              >
-                Confirm password
-              </Label>
-              <Input
-                id="confirmpassword"
-                type={showPassword ? "text" : "password"}
-                placeholder="Confirm password"
-                className="rounded-3xl border-primary h-14"
-              />
-              <Icon
-                name="viewPassword"
-                className="absolute right-4 bottom-3"
-                onClick={handleShowPassword}
-              />
-            </div>
-            <Button
-              className="w-full h-14 text-lg text-black font-semibold gap-4"
-              type="submit"
-            >
+            <>
+              <div className="flex flex-col space-y-1.5 relative z-[2px]">
+                <Label
+                  htmlFor="password"
+                  className="font-medium text-lg text-black"
+                >
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  // name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  className="rounded-3xl border-primary h-14"
+                  // onChange={(e) => handleFormInput(e)}
+                  {...register("password")}
+                />
+                <Icon
+                  name="viewPassword"
+                  className="absolute right-4 bottom-3"
+                  onClick={handleShowPassword}
+                />
+              </div>
+              {errors.password && (
+                <span className="text-red-700">{errors.password?.message}</span>
+              )}
+            </>
+            <>
+              <div className="flex flex-col space-y-1.5 relative">
+                <Label
+                  htmlFor="confirmPassword"
+                  className="font-medium text-lg text-black"
+                >
+                  Confirm password
+                </Label>
+                <Input
+                  id="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm password"
+                  className="rounded-3xl border-primary h-14"
+                  {...register("confirmPassword")}
+                />
+                <Icon
+                  name="viewPassword"
+                  className="absolute right-4 bottom-3"
+                  onClick={handleShowPassword}
+                />
+              </div>
+              {errors.confirmPassword && (
+                <span className="text-red-700">
+                  {errors.confirmPassword?.message}
+                </span>
+              )}
+            </>
+            <Button className="w-full h-14 text-lg text-black font-semibold gap-4">
               {!loading ? (
-                <>
-                  Shorten URL
-                  <Icon name="magic" />
-                </>
+                <input type="submit" value="Sign Up" />
               ) : (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               )}
