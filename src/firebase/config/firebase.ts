@@ -16,7 +16,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = isSupported().then((yes) => (yes ? getAnalytics(app) : null));
+export const analytics =
+  app.name && typeof window !== "undefined" ? getAnalytics(app) : null;
 export const googleProvider = new GoogleAuthProvider();
 export const auth = getAuth(app);
 export const db = getFirestore(app);

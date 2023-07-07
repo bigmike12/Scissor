@@ -5,6 +5,8 @@ import Footer from "@/components/Footer/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import Providers from "@/components/Provider/Provider";
 import Toast from "@/components/Toast/Toast";
+import { analytics } from "@/firebase/config/firebase";
+import { logEvent } from "firebase/analytics";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -18,6 +20,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  if (analytics !== null) {
+    logEvent(analytics, "/");
+  }
   return (
     <html lang="en">
       <body

@@ -1,9 +1,14 @@
 import PricingCard, {
   PricingCardToggle,
 } from "@/components/PricingCard/PricingCard";
+import { analytics } from "@/firebase/config/firebase";
+import { logEvent } from "firebase/analytics";
 import React from "react";
 
 const Pricing = () => {
+  if (analytics !== null) {
+    logEvent(analytics, "Pricing Visited");
+  }
   return (
     <div>
       <div className="mb-6">

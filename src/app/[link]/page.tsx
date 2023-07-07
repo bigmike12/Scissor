@@ -1,6 +1,7 @@
 "use client";
-import { db } from "@/firebase/config/firebase";
+import { analytics, db } from "@/firebase/config/firebase";
 import { addHttpPrefix, removeLeadingSlash } from "@/lib/utils";
+import { logEvent } from "firebase/analytics";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
@@ -9,6 +10,9 @@ const URLRedirect = () => {
   const pathname = usePathname();
 
   const path = removeLeadingSlash(pathname);
+  if (analytics !== null) {
+    logEvent(analytics, `${path} visited`);
+  }
   useEffect(() => {
     const redirect = async () => {
       const linksRef = collection(db, "links");
