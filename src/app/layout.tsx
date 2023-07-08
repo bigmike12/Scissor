@@ -20,7 +20,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (analytics !== null) {
+  if (typeof window !== "undefined" && analytics !== null) {
     logEvent(analytics, "/");
   }
   return (

@@ -6,8 +6,8 @@ import { logEvent } from "firebase/analytics";
 import React from "react";
 
 const Pricing = () => {
-  if (analytics !== null) {
-    logEvent(analytics, "Pricing Visited");
+  if (typeof window !== "undefined" && analytics !== null) {
+    logEvent(analytics, "/pricing");
   }
   return (
     <div>

@@ -10,8 +10,8 @@ const URLRedirect = () => {
   const pathname = usePathname();
 
   const path = removeLeadingSlash(pathname);
-  if (analytics !== null) {
-    logEvent(analytics, `${path} visited`);
+  if (typeof window !== "undefined" && analytics !== null) {
+    logEvent(analytics, `/${path} visited`);
   }
   useEffect(() => {
     const redirect = async () => {

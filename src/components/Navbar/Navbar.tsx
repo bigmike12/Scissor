@@ -6,16 +6,17 @@ import { Button } from "../../components/ui/button";
 import Icon from "../../assets/Icons/icon";
 import { Mulish } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
-import { LocalStorageKeys, NotificationTypes } from "@/lib/utils";
+import { NotificationTypes } from "@/lib/utils";
 import { showToast } from "../ShowToast/showToast";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/config/firebase";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const [loggenIn, setLoggedIn] = useState<boolean>(false);
-
+  const [user, setUser] = useState<any>(null);
   const handleLogout = () => {
     localStorage.clear();
     showToast("Logout Successful", NotificationTypes.SUCCESS);
@@ -23,27 +24,15 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(() => {
-    const checkUser = () => {
-      const userID = localStorage.getItem(LocalStorageKeys.USERID);
-
-      if (userID) {
-        setLoggedIn(true);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
       } else {
-        setLoggedIn(false);
+        setUser(null);
       }
-    };
-    checkUser();
+    });
 
-    if (typeof window !== "undefined") {
-      window.addEventListener("storage", () => {
-        // When storage changes refetch
-        checkUser();
-      });
-
-      return () => {
-        window.removeEventListener("storage", checkUser);
-      };
-    }
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -55,7 +44,7 @@ const Navbar: React.FC = () => {
       </a>
 
       <div className="flex gap-12">
-        {!loggenIn
+        {user === null
           ? NavbarData.map((data) =>
               data.id === 5 ? (
                 <Button className="text-base font-medium text-black">
