@@ -32,7 +32,7 @@ export const PricingCardToggle = () => {
 
 const PricingCard = () => {
   return (
-    <div className="flex justify-center items-center text-black">
+    <div className="flex lg:flex-row lg:gap-0 lg:justify-center flex-col gap-2 items-center text-black">
       {PricingData.map((data) => {
         const middle = data.id === 2;
         return (
@@ -40,7 +40,7 @@ const PricingCard = () => {
             className={`${
               middle ? "h-[568px]" : "h-[444px]"
             } w-[307px] bg-white rounded-xl px-8 py-6 shadow-lg ${
-              middle && "z-10"
+              middle && "lg:z-10"
             }`}
             key={data.id}
           >

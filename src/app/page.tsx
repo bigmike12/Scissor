@@ -5,9 +5,9 @@ import UrlInput from "@/components/UrlInput/UrlInput";
 
 const LandingPage = () => {
   return (
-    <div className="flex w-full items-center">
-      <div className="w-2/4">
-        <h2 className="font-extrabold text-[64px] leading-[150%]">
+    <div className="lg:flex w-full items-center">
+      <div className="lg:w-2/4 w-full">
+        <h2 className="font-extrabold text-[50px] lg:text-[64px] leading-[150%]">
           Shorten your URLs in seconds
         </h2>
         <div className="flex flex-col gap-[40px] mt-[58px]">
@@ -19,7 +19,7 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-      <div className="w-2/4 flex justify-center">
+      <div className="lg:w-2/4 w-full lg:flex justify-center my-5">
         <UrlInput />
       </div>
     </div>

@@ -5,7 +5,6 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
@@ -20,12 +19,6 @@ import googleSignIn from "@/firebase/auth/google";
 import { type ZodType, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// interface FormData {
-//   username: string;
-//   email: string;
-//   password: string;
-// }
 
 interface ZodFormData {
   username: string;
@@ -106,12 +99,11 @@ const Signup = () => {
 
   return (
     <div className="flex justify-center items-center mt-10">
-      <Card className="w-[660px] h-auto bg-neutral px-28 pb-20 pt-12">
+      <Card className="lg:w-[660px] w-full h-auto bg-neutral lg:px-28 px-2 lg:pb-20 lg:pt-12">
         <CardHeader>
           <CardTitle className="text-center font-bold text-[32px]">
             Sign Up
           </CardTitle>
-          <CardDescription></CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -128,11 +120,9 @@ const Signup = () => {
               </Label>
               <Input
                 id="username"
-                // name="username"
                 type="text"
                 placeholder="Enter username"
                 className="rounded-3xl border-primary h-14"
-                // onChange={(e) => handleFormInput(e)}
                 {...register("username")}
               />
               {errors.username && (
@@ -145,11 +135,9 @@ const Signup = () => {
               </Label>
               <Input
                 id="email"
-                // name="email"
                 type="email"
                 placeholder="Enter email"
                 className="rounded-3xl border-primary h-14"
-                // onChange={(e) => handleFormInput(e)}
                 {...register("email")}
               />
               {errors.email && (
@@ -166,11 +154,9 @@ const Signup = () => {
                 </Label>
                 <Input
                   id="password"
-                  // name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter password"
                   className="rounded-3xl border-primary h-14"
-                  // onChange={(e) => handleFormInput(e)}
                   {...register("password")}
                 />
                 <Icon

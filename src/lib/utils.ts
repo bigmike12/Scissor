@@ -39,3 +39,21 @@ export const addHttpPrefix = (url: string): string => {
     return `${httpsPrefix}${url}`;
   }
 };
+
+/**
+ * Ensure that a given string matches the character count and ellipsized at that point
+ * @param {String} text Target text
+ * @param {Number} numChars Number of characters needed
+ * @returns {String} Truncated text
+ */
+export const truncateMultilineText = (text: string, numChars: number) => {
+  if (!text) return "";
+
+  // Because '...' will be appended to long strings,
+  // this ensures that the entire character count is as specified
+  const maxStringLength = numChars - 3;
+
+  return maxStringLength > text.length
+    ? text
+    : `${text.trim().substring(0, maxStringLength)}...`;
+};

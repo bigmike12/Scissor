@@ -16,7 +16,7 @@ const Pricing = () => {
           Find a plan that meets your needs
         </h1>
       </div>
-      <div className="bg-backgroundVarOne h-[785px] w-full flex items-center flex-col justify-center">
+      <div className="bg-backgroundVarOne py-4 h-auto lg:h-[785px] w-full flex items-center flex-col justify-center">
         <PricingCardToggle />
         <PricingCard />
       </div>

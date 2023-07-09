@@ -1,13 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -109,12 +102,7 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
 
   return (
     <div>
-      <Card className="w-[508px] h-[496px] bg-neutral">
-        <CardHeader>
-          <CardTitle></CardTitle>
-          <CardDescription></CardDescription>
-        </CardHeader>
-
+      <Card className="w-full lg:w-[508px] h-auto lg:h-[496px] bg-neutral py-8">
         <CardContent>
           <form onSubmit={!edit ? handleSubmit : handleEdit}>
             <div className="flex flex-col space-y-1.5">
