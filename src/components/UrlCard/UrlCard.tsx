@@ -26,7 +26,7 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
   };
 
   const handleCopy = (text: string) => {
-    const URLPrefix = "https://scissor-8nse.vercel.app/";
+    const URLPrefix = "https://scissor-pi.vercel.app//";
     const fullUrl = `${URLPrefix}${text}`;
     navigator.clipboard.writeText(fullUrl);
     showToast("Copied!", NotificationTypes.SUCCESS);
@@ -52,7 +52,7 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
             />
           </div>
           <div>
-            <div className="lg:w-[681px] w-[312px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
+            <div className="lg:w-[681px] max-w-[312px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
               <p className="break-all">{data.longURL}</p>
             </div>
             <div className="flex lg:flex flex-col gap-4">

@@ -1,6 +1,6 @@
-const SVG = () => (
+const SVG = (props: any) => (
   <svg
-    width="36"
+    width="31"
     height="31"
     viewBox="0 0 36 31"
     fill="none"

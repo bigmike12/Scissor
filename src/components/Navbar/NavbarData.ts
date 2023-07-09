@@ -9,11 +9,11 @@ export const NavbarData = [
     title: "Pricing ",
     url: "/pricing",
   },
-  {
-    id: 3,
-    title: "FAQs",
-    url: "#",
-  },
+  // {
+  //   id: 3,
+  //   title: "FAQs",
+  //   url: "#",
+  // },
   {
     id: 4,
     title: "Login",
@@ -37,11 +37,11 @@ export const LoggedInNavbarData = [
     title: "Pricing ",
     url: "/pricing",
   },
-  {
-    id: 3,
-    title: "FAQs",
-    url: "#",
-  },
+  // {
+  //   id: 3,
+  //   title: "FAQs",
+  //   url: "#",
+  // },
   {
     id: 4,
     title: "Logout",

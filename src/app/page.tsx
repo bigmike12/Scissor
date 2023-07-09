@@ -13,7 +13,9 @@ const LandingPage = () => {
         <div className="flex flex-col gap-[40px] mt-[58px]">
           {LandingPageData.map((data) => (
             <div className="flex items-center" key={data.id}>
-              <Icon name="check" />
+              <div>
+                <Icon name="check" />
+              </div>
               <p className="font-normal text-[32px] ml-[14px]">{data.text}</p>
             </div>
           ))}

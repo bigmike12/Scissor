@@ -3,15 +3,16 @@ import React from "react";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetFooter,
-  SheetClose,
+  // SheetHeader,
+  // SheetTitle,
+  // SheetDescription,
+  // SheetFooter,
+  // SheetClose,
 } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import Link from "next/link";
+// import { Label } from "@/components/ui/label";
 
 interface Props {
   isDrawerOpen: boolean;
@@ -24,33 +25,23 @@ const SideBar: React.FC<Props> = ({ isDrawerOpen, toggleDrawer }) => {
       <Sheet open={isDrawerOpen} onOpenChange={toggleDrawer}>
         <SheetContent
           position="right"
-          className="border-none bg-foregroundVarOne w-[580px]"
+          className="border-none bg-foregroundVarOne lg:w-[580px] w-3/4 flex justify-center items-center"
         >
-          <SheetHeader>
+          {/* <SheetHeader>
             <SheetTitle>Edit profile</SheetTitle>
             <SheetDescription>
               Make changes to your profile here. Click save when you're done.
             </SheetDescription>
           </SheetHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" />
-            </div>
-          </div>
+         
           <SheetFooter>
             <SheetClose asChild>
               <Button type="submit">Save changes</Button>
             </SheetClose>
-          </SheetFooter>
+          </SheetFooter> */}
+          <Button className=" text-black bg-transparent border border-primary h-[48px] lg:w-[138px] w-full font-medium">
+            <Link href="/">Coming Soon</Link>
+          </Button>
         </SheetContent>
       </Sheet>
     </div>

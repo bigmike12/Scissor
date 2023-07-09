@@ -123,7 +123,7 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
               <Label htmlFor="url" className="font-medium text-lg text-black">
                 Customise your link (optional)
               </Label>
-              <div className="flex gap-4">
+              <div className="lg:flex lg:gap-4 flex gap-4 flex-col">
                 <Input
                   id="url"
                   name="domain"

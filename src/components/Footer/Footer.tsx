@@ -13,7 +13,7 @@ interface Social {
 const Footer = () => {
   return (
     <div
-      className={`mt-0 bottom-0 w-full h-20 bg-backgroundVarOne px-8 lg:px-[120px] fixed flex items-center justify-between ${mulish.className} z-30`}
+      className={`mt-0 bottom-0 w-full h-20 bg-backgroundVarOne px-8 lg:px-[120px] lg:fixed flex items-center justify-between ${mulish.className} z-30`}
     >
       <div>
         <p className="lg:text-base text-xs">

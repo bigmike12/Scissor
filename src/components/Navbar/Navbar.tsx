@@ -50,8 +50,8 @@ const Navbar: React.FC = () => {
         <NavigationMenu>
           <NavigationMenuItem className="list-none">
             <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="w-[400px] flex flex-col gap-3 p-3">
+            <NavigationMenuContent className="min-w-[400px]">
+              <div className="flex flex-col gap-3 p-3">
                 {user === null
                   ? NavbarData.map((data) =>
                       data.id === 5 ? (
