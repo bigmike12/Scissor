@@ -51,11 +51,11 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
               className="hover:cursor-pointer"
             />
           </div>
-          <div>
-            <div className="lg:w-[681px] max-w-[312px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
+          <div className="w-full">
+            <div className="sm:w-[681px] min-w-[208px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
               <p className="break-all">{data.longURL}</p>
             </div>
-            <div className="flex lg:flex flex-col gap-4">
+            <div className="flex lg:flex-row flex-col gap-4">
               <Button className="bg-transparent border border-white h-[48px] lg:w-[138px] w-full text-white font-medium gap-3">
                 <Icon name="share" />
                 Share link
