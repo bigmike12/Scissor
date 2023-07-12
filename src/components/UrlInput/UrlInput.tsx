@@ -106,7 +106,10 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
         <CardContent>
           <form onSubmit={!edit ? handleSubmit : handleEdit}>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="url" className="font-medium text-lg text-black">
+              <Label
+                htmlFor="url"
+                className="font-medium text-lg text-black lg:mb-3"
+              >
                 Shorten your URL
               </Label>
               <Input
@@ -120,16 +123,20 @@ const UrlInput: React.FC<Props> = ({ data, edit }) => {
               />
             </div>
             <div className="flex flex-col space-y-1.5 mt-[35px]">
-              <Label htmlFor="url" className="font-medium text-lg text-black">
+              <Label
+                htmlFor="url"
+                className="font-medium text-lg text-black lg:mb-3"
+              >
                 Customise your link (optional)
               </Label>
-              <div className="lg:flex lg:gap-4 flex gap-4 flex-col">
+              <div className="lg:flex lg:gap-4 flex gap-4 flex-col lg:flex-row">
                 <Input
                   id="url"
                   name="domain"
                   tabIndex={-1}
-                  placeholder="Scissor.com/"
+                  placeholder="scissor-pi.vercel.app/"
                   onChange={handleFormInput}
+                  disabled={true}
                   className="rounded-3xl border-primary h-14 active:border-primary focus:border-primary font-bold text-black"
                 />
                 <Input
