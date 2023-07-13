@@ -4,7 +4,7 @@ import { type TableData } from "../../lib/commons";
 
 import React, { useState } from "react";
 import { showToast } from "../ShowToast/showToast";
-import { NotificationTypes } from "@/lib/utils";
+import { NotificationTypes, truncateMultilineText } from "@/lib/utils";
 import EditModal from "@/components/Modal/Modal";
 import QRModal from "../QRModal/QRModal";
 
@@ -52,8 +52,10 @@ const UrlCard = ({ data, handleOpenDrawer }: Props) => {
             />
           </div>
           <div className="w-full">
-            <div className="sm:w-[681px] min-w-[208px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
-              <p className="break-all">{data.longURL}</p>
+            <div className="sm:w-full min-w-[208px] px-3 py-2 bg-ScissorLemonVarOne rounded-xl mb-6">
+              <p className="break-all">
+                {truncateMultilineText(data.longURL, 230)}
+              </p>
             </div>
             <div className="flex lg:flex-row flex-col gap-4">
               <Button className="bg-transparent border border-white h-[48px] lg:w-[138px] w-full text-white font-medium gap-3">
